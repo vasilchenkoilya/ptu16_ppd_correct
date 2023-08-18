@@ -26,7 +26,16 @@ while True:
     elif pasirinkimas == "1":
         pass
     elif pasirinkimas == "2":
-        pass
+        #pasirinkti produkta
+        #parasyti kiek kg/l prideti (skaicius)
+        print("Saldytuve yra tokie produktai: ")
+        print(saldytuvas.keys(), enumerate(saldytuvas.keys()) sep="\n")
+        produkto_pasirinkimas = input("Parasykite norimo produkto numeri: ")
+        prideti = input("Parasykite kiek norite prideti produkto: ")
+
+
+
+
     elif pasirinkimas == "3":
         pass
     elif pasirinkimas == "4":
