@@ -30,6 +30,6 @@ while True:
     elif pasirinkimas == "3":
         pass
     elif pasirinkimas == "4":
-        pass
+        print(saldytuvas)
     elif pasirinkimas == "5":
         pass
