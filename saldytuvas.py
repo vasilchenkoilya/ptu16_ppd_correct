@@ -24,6 +24,9 @@ while True:
     if pasirinkimas == "0":
         break
     elif pasirinkimas == "1":
+        produktas = input('Iveskite produkta: ')
+        kiekis = input('Iveskite kieki: ')
+        saldytuvas.update({produktas: kiekis})
         pass
     elif pasirinkimas == "2":
         pass
