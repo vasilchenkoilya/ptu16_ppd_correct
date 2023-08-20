@@ -11,6 +11,9 @@
 # 5 - ieškoti produktų - Arnoldas
 
 # 0 - išėjimas - Ilya
+import os
+#os system isvalo konsole kaip clear komanda kad kiekviena karta tiktais reikalingas tekstas butu
+os.system("cls")
 saldytuvas = {}
 meniu = """
  1 - pridėti naują produktą 
@@ -26,16 +29,33 @@ while True:
     elif pasirinkimas == "1":
         pass
     elif pasirinkimas == "2":
-        #pasirinkti produkta
-        #parasyti kiek kg/l prideti (skaicius)
-        print("Saldytuve yra tokie produktai: ")
-        print(saldytuvas.keys(), enumerate(saldytuvas.keys()) sep="\n")
-        produkto_pasirinkimas = input("Parasykite norimo produkto numeri: ")
-        prideti = input("Parasykite kiek norite prideti produkto: ")
+        os.system("cls")
+        
+        #kintamosios - "saldytuvas" galima istrinti
+        saldytuvas = {
+                    "Mesa" : 4,
+                    "Gerimai" : 1,
+                    "Specijos" : 5,
+                }
+        indeksas = 0
+        produktai_saldytuve = list(saldytuvas.keys())
 
+        #Lentele kas yra saldytuve
+        print("Saldytuve yra tokie produktai: ", "\n")
+        print(f"{'Nr.':3s} | {'Maisto produktas':15s} | {'Produkto kiekis':10s}", end="\n")
+        for produktas in saldytuvas:
+            print(f"{indeksas+1:>3d} | {produktas:<16s} | {saldytuvas[produktas]:<5d}")
+            indeksas += 1
 
+        #Vartotojo ivestis
+        pasirinktas_indeksas = int(input("Parasykite norimo produkto numeri: ")) -1
+        prideti = int(input("Parasykite kiek norite prideti produkto: "))
 
+        #Maisto papildymas
+        pasirinktas_produktas = produktai_saldytuve[pasirinktas_indeksas]
+        saldytuvas[pasirinktas_produktas] += prideti
 
+        break
     elif pasirinkimas == "3":
         pass
     elif pasirinkimas == "4":
