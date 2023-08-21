@@ -29,6 +29,7 @@ meniu = """
  5 - ieškoti produktų 
  0 - išėjimas  """
 while True:
+    print(meniu)
     pasirinkimas = input("Pasirinkite veiksma: ")
     if pasirinkimas == "0":
         break
