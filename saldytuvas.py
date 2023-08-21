@@ -46,6 +46,10 @@ while True:
         else:
             print(f"{produktas} nėra šaldytuve.")
     elif pasirinkimas == "4":
-        print(saldytuvas)
+         print("Saldytuve esantys produktai:")
+         print("{:<15} {:<10}".format("Produktas", "Kiekis"))
+         print("-" * 25)
+         for produktas, kiekis in saldytuvas.items():
+          print("{:<15} {:<10}".format(produktas, kiekis))
     elif pasirinkimas == "5":
         pass
