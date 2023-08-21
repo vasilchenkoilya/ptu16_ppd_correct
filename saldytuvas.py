@@ -11,11 +11,10 @@
 # 5 - ieškoti produktų - Arnoldas
 
 # 0 - išėjimas - Ilya
-saldytuvas = {
-    "apelsinai": 1.5,
-    "bananai" : 2,
-    "mesa" : 3,
-    "pienas" : 0.9}
+import os
+#os system isvalo konsole kaip clear komanda kad kiekviena karta tiktais reikalingas tekstas butu
+os.system("cls")
+saldytuvas = {}
 meniu = """
  1 - pridėti naują produktą 
  2 - papildyti produkto kiekį
@@ -32,7 +31,33 @@ while True:
         kiekis = input('Iveskite kieki: ')
         saldytuvas[produktas] = kiekis
     elif pasirinkimas == "2":
-        pass
+        os.system("cls")
+        
+        #kintamosios - "saldytuvas" galima istrinti
+        saldytuvas = {
+                    "Mesa" : 4,
+                    "Gerimai" : 1,
+                    "Specijos" : 5,
+                }
+        indeksas = 0
+        produktai_saldytuve = list(saldytuvas.keys())
+
+        #Lentele kas yra saldytuve
+        print("Saldytuve yra tokie produktai: ", "\n")
+        print(f"{'Nr.':3s} | {'Maisto produktas':15s} | {'Produkto kiekis':10s}", end="\n")
+        for produktas in saldytuvas:
+            print(f"{indeksas+1:>3d} | {produktas:<16s} | {saldytuvas[produktas]:<5d}")
+            indeksas += 1
+
+        #Vartotojo ivestis
+        pasirinktas_indeksas = int(input("Parasykite norimo produkto numeri: ")) -1
+        prideti = int(input("Parasykite kiek norite prideti produkto: "))
+
+        #Maisto papildymas
+        pasirinktas_produktas = produktai_saldytuve[pasirinktas_indeksas]
+        saldytuvas[pasirinktas_produktas] += prideti
+
+        break
     elif pasirinkimas == "3":
         # Ištraukti produktą nurodant kiekį
         produktas = input("Įveskite produkto pavadinimą, kurį norite ištraukti: ")
