@@ -27,7 +27,9 @@ while True:
     if pasirinkimas == "0":
         break
     elif pasirinkimas == "1":
-        pass
+        produktas = input('Iveskite produkta: ')
+        kiekis = input('Iveskite kieki: ')
+        saldytuvas[produktas] = kiekis
     elif pasirinkimas == "2":
         os.system("cls")
         
@@ -58,8 +60,18 @@ while True:
 
         break
     elif pasirinkimas == "3":
-        pass
+        # Ištraukti produktą nurodant kiekį
+        produktas = input("Įveskite produkto pavadinimą, kurį norite ištraukti: ")
+        if produktas in saldytuvas:
+            kiekis = int(input(f"Įveskite kiekį, kurį norite ištraukti (turimas kiekis: {saldytuvas[produktas]}): "))
+            if kiekis <= saldytuvas[produktas]:
+                saldytuvas[produktas] -= kiekis
+                print(f"{produktas} ištraukta {kiekis} vnt. Dabartinis kiekis: {saldytuvas[produktas]}")
+            else:
+                print("Nepakankamas kiekis šaldytuve.")
+        else:
+            print(f"{produktas} nėra šaldytuve.")
     elif pasirinkimas == "4":
-        pass
+        print(saldytuvas)
     elif pasirinkimas == "5":
         pass
