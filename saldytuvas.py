@@ -52,7 +52,7 @@ while True:
         print("Saldytuve yra tokie produktai: ", "\n")
         print(f"{'Nr.':3s} | {'Maisto produktas':15s} | {'Produkto kiekis':10s}", end="\n")
         for produktas in saldytuvas:
-            print(f"{indeksas+1:>3d} | {produktas:<16s} | {saldytuvas[produktas]:<5d}")
+            print(f"{indeksas+1:>3d} | {produktas:<16s} | {saldytuvas[produktas]}")
             indeksas += 1
 
         #Vartotojo ivestis
