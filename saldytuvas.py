@@ -11,7 +11,11 @@
 # 5 - ieškoti produktų - Arnoldas
 
 # 0 - išėjimas - Ilya
-saldytuvas = {}
+saldytuvas = {
+    "apelsinai": 1.5,
+    "bananai" : 2,
+    "mesa" : 3,
+    "pienas" : 0.9}
 meniu = """
  1 - pridėti naują produktą 
  2 - papildyti produkto kiekį
@@ -41,7 +45,6 @@ while True:
                 print("Nepakankamas kiekis šaldytuve.")
         else:
             print(f"{produktas} nėra šaldytuve.")
-        pass
     elif pasirinkimas == "4":
         print(saldytuvas)
     elif pasirinkimas == "5":
