@@ -11,10 +11,16 @@
 # 5 - ieškoti produktų - Arnoldas
 
 # 0 - išėjimas - Ilya
-import os
-#os system isvalo konsole kaip clear komanda kad kiekviena karta tiktais reikalingas tekstas butu
-os.system("cls")
-saldytuvas = {}
+# import os
+# #os system isvalo konsole kaip clear komanda kad kiekviena karta tiktais reikalingas tekstas butu
+# os.system("cls")
+saldytuvas = {
+    "apelsinai" : 1.5,
+    "duona" : 0.8,
+    "mesa" : 2,
+    "pienas" : 1,
+    "desra" : 0.5
+}
 meniu = """
  1 - pridėti naują produktą 
  2 - papildyti produkto kiekį
@@ -23,7 +29,7 @@ meniu = """
  5 - ieškoti produktų 
  0 - išėjimas  """
 while True:
-    pasirinkimas = input("Pasirinkite: ")
+    pasirinkimas = input("Pasirinkite veiksma: ")
     if pasirinkimas == "0":
         break
     elif pasirinkimas == "1":
@@ -31,18 +37,18 @@ while True:
         kiekis = input('Iveskite kieki: ')
         saldytuvas[produktas] = kiekis
     elif pasirinkimas == "2":
-        os.system("cls")
+        # os.system("cls")
         
-        #kintamosios - "saldytuvas" galima istrinti
-        saldytuvas = {
-                    "Mesa" : 4,
-                    "Gerimai" : 1,
-                    "Specijos" : 5,
-                }
+        # #kintamosios - "saldytuvas" galima 2istrinti
+        # saldytuvas = {
+        #             "Mesa" : 4,
+        #             "Gerimai" : 1,
+        #             "Specijos" : 5,
+        #         }
         indeksas = 0
         produktai_saldytuve = list(saldytuvas.keys())
 
-        #Lentele kas yra saldytuve
+        # #Lentele kas yra saldytuve
         print("Saldytuve yra tokie produktai: ", "\n")
         print(f"{'Nr.':3s} | {'Maisto produktas':15s} | {'Produkto kiekis':10s}", end="\n")
         for produktas in saldytuvas:
@@ -56,8 +62,6 @@ while True:
         #Maisto papildymas
         pasirinktas_produktas = produktai_saldytuve[pasirinktas_indeksas]
         saldytuvas[pasirinktas_produktas] += prideti
-
-        break
     elif pasirinkimas == "3":
         # Ištraukti produktą nurodant kiekį
         produktas = input("Įveskite produkto pavadinimą, kurį norite ištraukti: ")
