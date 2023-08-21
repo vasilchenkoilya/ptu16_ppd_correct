@@ -55,6 +55,7 @@ while True:
         pasirinktas_produktas = produktai_saldytuve[pasirinktas_indeksas]
         saldytuvas[pasirinktas_produktas] += prideti
 
+
         break
     elif pasirinkimas == "3":
         pass
