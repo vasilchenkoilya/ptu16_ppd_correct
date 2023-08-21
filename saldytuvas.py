@@ -11,7 +11,9 @@
 # 5 - ieškoti produktų - Arnoldas
 
 # 0 - išėjimas - Ilya
-saldytuvas = {}
+saldytuvas = {
+    'pienas': 2,
+}
 meniu = """
  1 - pridėti naują produktą 
  2 - papildyti produkto kiekį
