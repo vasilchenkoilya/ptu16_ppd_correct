@@ -45,4 +45,10 @@ while True:
     elif pasirinkimas == "4":
         pass
     elif pasirinkimas == "5":
-        pass
+        
+       #Pruduktu paeska
+        produktas = input("Koki produkta ieskote? ")
+    if produktas in saldytuvas:
+        print(f"{produktas} - yra šaldytuve.")
+    else:
+        print(f"{produktas} - nėra šaldytuve.")
