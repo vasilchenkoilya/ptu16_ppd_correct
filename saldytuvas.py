@@ -38,54 +38,48 @@ while True:
         kiekis = input('Iveskite kieki: ')
         saldytuvas[produktas] = kiekis
     elif pasirinkimas == "2":
-        # os.system("cls")
-        
-        # #kintamosios - "saldytuvas" galima 2istrinti
-        # saldytuvas = {
-        #             "Mesa" : 4,
-        #             "Gerimai" : 1,
-        #             "Specijos" : 5,
-        #         }
         indeksas = 0
         produktai_saldytuve = list(saldytuvas.keys())
 
-        # #Lentele kas yra saldytuve
+        # Lentele kas yra saldytuve
         print("Saldytuve yra tokie produktai: ", "\n")
         print(f"{'Nr.':3s} | {'Maisto produktas':15s} | {'Produkto kiekis':10s}", end="\n")
         for produktas in saldytuvas:
             print(f"{indeksas+1:>3d} | {produktas:<16s} | {saldytuvas[produktas]}")
             indeksas += 1
 
-        #Vartotojo ivestis
+        # Vartotojo ivestis
         pasirinktas_indeksas = int(input("Parasykite norimo produkto numeri: ")) -1
         prideti = int(input("Parasykite kiek norite prideti produkto: "))
 
-        #Maisto papildymas
+        # Maisto papildymas
         pasirinktas_produktas = produktai_saldytuve[pasirinktas_indeksas]
         saldytuvas[pasirinktas_produktas] += prideti
     elif pasirinkimas == "3":
         # Ištraukti produktą nurodant kiekį
         produktas = input("Įveskite produkto pavadinimą, kurį norite ištraukti: ")
         if produktas in saldytuvas:
-            kiekis = int(input(f"Įveskite kiekį, kurį norite ištraukti (turimas kiekis: {saldytuvas[produktas]}): "))
+            kiekis = float(input(f"Įveskite kiekį, kurį norite ištraukti (turimas kiekis: {saldytuvas[produktas]}): "))
             if kiekis <= saldytuvas[produktas]:
                 saldytuvas[produktas] -= kiekis
                 print(f"{produktas} ištraukta {kiekis} vnt. Dabartinis kiekis: {saldytuvas[produktas]}")
+                if saldytuvas[produktas] == 0:
+                    del saldytuvas[produktas]
             else:
                 print("Nepakankamas kiekis šaldytuve.")
         else:
             print(f"{produktas} nėra šaldytuve.")
     elif pasirinkimas == "4":
-            print("Saldytuve esantys produktai:")
-            print("{:<15} {:<10}".format("Produktas", "Kiekis"))
-            print("-" * 25)
-            for produktas, kiekis in saldytuvas.items():
-                print("{:<15} {:<10}".format(produktas, kiekis))
+        print("Saldytuve esantys produktai:")
+        print("{:<15} {:<10}".format("Produktas", "Kiekis"))
+        print("-" * 25)
+        for produktas, kiekis in saldytuvas.items():
+            print("{:<15} {:<10}".format(produktas, kiekis))
     elif pasirinkimas == "5":
         
-       #Pruduktu paeska
+        # Pruduktu paeska
         produktas = input("Koki produkta ieskote? ")
-    if produktas in saldytuvas:
-        print(f"{produktas} - yra šaldytuve.")
-    else:
-        print(f"{produktas} - nėra šaldytuve.")
+        if produktas in saldytuvas:
+            print(f"{produktas} - yra {saldytuvas[produktas]} šaldytuve.")
+        else:
+            print(f"{produktas} - nėra šaldytuve.")
