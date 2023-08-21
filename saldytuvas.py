@@ -1,5 +1,4 @@
 
-# while True : - True
 # 1 - pridėti naują produktą - Ilya
 
 # 2 - papildyti produkto kiekį - Igoris
