@@ -27,7 +27,9 @@ meniu = """
  3 - ištraukti produktą nurodant kiekį
  4 - peržiūrėti produktus
  5 - ieškoti produktų 
- 0 - išėjimas  """
+ 0 - išėjimas
+   
+       """
 while True:
     print(meniu)
     pasirinkimas = input("Pasirinkite veiksma: ")
