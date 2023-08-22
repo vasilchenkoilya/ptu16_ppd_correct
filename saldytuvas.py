@@ -20,8 +20,8 @@ meniu = """
 
 # 1 - pridėti naują produktą - Ilya
 def prideti(saldytuvas):
-    name = input('Iveskite produkto pavadinima')
-    kiekis = float(input('Iveskite kieki'))
+    name = input('Įveskite produkto pavadinimą: ')
+    kiekis = float(input('Įveskite kiekį: '))
     saldytuvas[name] = kiekis
     return saldytuvas
 
@@ -48,26 +48,39 @@ def papildyti(saldytuvas):
     return saldytuvas
 
 # 3 - ištraukti produktą nurodant kiekį -Eimantas
-def istraukti():
-    pass
+def istraukti(saldytuvas):
+    produktas = input("Įveskite produkto pavadinimą, kurį norite ištraukti: ")
+    if produktas in saldytuvas:
+        kiekis = float(input(f"Įveskite kiekį, kurį norite ištraukti (turimas kiekis: {saldytuvas[produktas]}): "))
+        if kiekis <= saldytuvas[produktas]:
+            saldytuvas[produktas] -= kiekis
+            print(f"{produktas} ištraukta {kiekis}, Dabartinis kiekis: {saldytuvas[produktas]}")
+            if saldytuvas[produktas] == 0:
+                del saldytuvas[produktas]
 
 # 4 - peržiūrėti produktus - Einaras
-def perziureti():
-    pass
+def perziureti(saldytuvas):
+    print("Saldytuve esantys produktai:")
+    print("{:<15} {:<10}".format("Produktas", "Kiekis"))
+    print("-" * 25)
+    for produktas, kiekis in saldytuvas.items():
+        print("{:<15} {:<10}".format(produktas, kiekis))
 
 # 5 - ieškoti produktų - Arnoldas
-def ieskoti():
-    pass
+def ieskoti_produkta(produktas, saldytuvas):
+    if produktas in saldytuvas:
+        print(f"{produktas} - yra {saldytuvas[produktas]} šaldytuve.")
+    else:
+        print(f"{produktas} - nėra šaldytuve.")
 
-# 0 - išėjimas - Ilya
-# UPDATE INFo 
+# 6 skaiciuoti produktu svori
 def skaiciuoti(saldytuvas):
     saldytuvo_svoris = 0
     for svoris in saldytuvas:
         saldytuvo_svoris += saldytuvas[svoris]
     print(f"Saldytuvo svoris yra: {saldytuvo_svoris}")
     return saldytuvo_svoris
-
+# 7 recepto patikrinimas
 def ar_iseina(saldytuvas, receptas):
     iseina = []
     for produktas, kiekis in receptas.items():
@@ -102,35 +115,14 @@ while True:
     elif pasirinkimas == "2":
         saldytuvas = papildyti(saldytuvas)
     elif pasirinkimas == "3":
-        # Ištraukti produktą nurodant kiekį
-        produktas = input("Įveskite produkto pavadinimą, kurį norite ištraukti: ")
-        if produktas in saldytuvas:
-            kiekis = float(input(f"Įveskite kiekį, kurį norite ištraukti (turimas kiekis: {saldytuvas[produktas]}): "))
-            if kiekis <= saldytuvas[produktas]:
-                saldytuvas[produktas] -= kiekis
-                print(f"{produktas} ištraukta {kiekis} vnt. Dabartinis kiekis: {saldytuvas[produktas]}")
-                if saldytuvas[produktas] == 0:
-                    del saldytuvas[produktas]
-            else:
-                print("Nepakankamas kiekis šaldytuve.")
-        else:
-            print(f"{produktas} nėra šaldytuve.")
+        saldytuvas = istraukti(saldytuvas)
     elif pasirinkimas == "4":
-        print("Saldytuve esantys produktai:")
-        print("{:<15} {:<10}".format("Produktas", "Kiekis"))
-        print("-" * 25)
-        for produktas, kiekis in saldytuvas.items():
-            print("{:<15} {:<10}".format(produktas, kiekis))
+        perziureti(saldytuvas)
     elif pasirinkimas == "5":
-        
-        # Pruduktu paeska
         produktas = input("Koki produkta ieskote? ")
-        if produktas in saldytuvas:
-            print(f"{produktas} - yra {saldytuvas[produktas]} šaldytuve.")
-        else:
-            print(f"{produktas} - nėra šaldytuve.")
+        ieskoti_produkta(produktas, saldytuvas)
     elif pasirinkimas == "6":
-        skaiciuoti(saldytuvas)
+        print(f'Bendras produktu svoris: {skaiciuoti(saldytuvas)} kg.')
     elif pasirinkimas == "7":
         vartotojo_ivedimas = input('Iveskite recepta pagal pavizdi : "produktas: kiekis", ""produktas: kiekis", .... ')
         receptas_list = vartotojo_ivedimas.split(', ')
@@ -138,4 +130,4 @@ while True:
         for recepto_dalis in receptas_list:
             key, value = recepto_dalis.split(': ')
             receptas[key] = float(value)
-        ar_iseina(saldytuvas,receptas)
+        ar_iseina(saldytuvas, receptas)
