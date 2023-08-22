@@ -20,8 +20,8 @@ meniu = """
 
 # 1 - pridėti naują produktą - Ilya
 def prideti(saldytuvas):
-    name = input('Iveskite produkto pavadinima')
-    kiekis = float(input('Iveskite kieki'))
+    name = input('Įveskite produkto pavadinimą: ')
+    kiekis = float(input('Įveskite kiekį: '))
     saldytuvas[name] = kiekis
     return saldytuvas
 
@@ -145,4 +145,4 @@ while True:
         for recepto_dalis in receptas_list:
             key, value = recepto_dalis.split(': ')
             receptas[key] = float(value)
-        ar_iseina(saldytuvas,receptas)
+        ar_iseina(saldytuvas, receptas)
