@@ -27,7 +27,15 @@ def prideti(saldytuvas):
 def papildyti():
     pass
 # 3 - ištraukti produktą nurodant kiekį -Eimantas
-def istraukti():
+def istraukti(saldytuvas):
+    produktas = input("Įveskite produkto pavadinimą, kurį norite ištraukti: ")
+    if produktas in saldytuvas:
+        kiekis = float(input(f"Įveskite kiekį, kurį norite ištraukti (turimas kiekis: {saldytuvas[produktas]}): "))
+        if kiekis <= saldytuvas[produktas]:
+            saldytuvas[produktas] -= kiekis
+            print(f"{produktas} ištraukta {kiekis} vnt. Dabartinis kiekis: {saldytuvas[produktas]}")
+            if saldytuvas[produktas] == 0:
+                del saldytuvas[produktas]
     pass
 # 4 - peržiūrėti produktus - Einaras
 def perziureti():
