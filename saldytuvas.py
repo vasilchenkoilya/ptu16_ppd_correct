@@ -23,6 +23,7 @@ def prideti(saldytuvas):
     name = input('Iveskite produkto pavadinima')
     kiekis = float(input('Iveskite kieki'))
     saldytuvas[name] = kiekis
+    return saldytuvas
 
 # 2 - papildyti produkto kiekį - Igoris
 def papildyti(saldytuvas):
@@ -96,9 +97,9 @@ while True:
     if pasirinkimas == "0":
         break
     elif pasirinkimas == "1":
-        prideti(saldytuvas)
+        saldytuvas = prideti(saldytuvas)
     elif pasirinkimas == "2":
-        papildyti(saldytuvas)
+        saldytuvas = papildyti(saldytuvas)
     elif pasirinkimas == "3":
         # Ištraukti produktą nurodant kiekį
         produktas = input("Įveskite produkto pavadinimą, kurį norite ištraukti: ")
@@ -128,7 +129,7 @@ while True:
         else:
             print(f"{produktas} - nėra šaldytuve.")
     elif pasirinkimas == "6":
-        pass
+        skaiciuoti(saldytuvas)
     elif pasirinkimas == "7":
         vartotojo_ivedimas = input('Iveskite recepta pagal pavizdi : "produktas: kiekis", ""produktas: kiekis", .... ')
         receptas_list = vartotojo_ivedimas.split(', ')
