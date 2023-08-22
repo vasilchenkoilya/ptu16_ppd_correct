@@ -54,7 +54,7 @@ def istraukti(saldytuvas):
         kiekis = float(input(f"Įveskite kiekį, kurį norite ištraukti (turimas kiekis: {saldytuvas[produktas]}): "))
         if kiekis <= saldytuvas[produktas]:
             saldytuvas[produktas] -= kiekis
-            print(f"{produktas} ištraukta {kiekis} vnt. Dabartinis kiekis: {saldytuvas[produktas]}")
+            print(f"{produktas} ištraukta {kiekis}, Dabartinis kiekis: {saldytuvas[produktas]}")
             if saldytuvas[produktas] == 0:
                 del saldytuvas[produktas]
 
@@ -67,17 +67,19 @@ def perziureti(saldytuvas):
         print("{:<15} {:<10}".format(produktas, kiekis))
 
 # 5 - ieškoti produktų - Arnoldas
-def ieskoti():
-    pass
+def ieskoti_produkta(produktas, saldytuvas):
+    if produktas in saldytuvas:
+        print(f"{produktas} - yra {saldytuvas[produktas]} šaldytuve.")
+    else:
+        print(f"{produktas} - nėra šaldytuve.")
 
-# 0 - išėjimas - Ilya
-# UPDATE INFo 
+# 6 skaiciuoti produktu svori
 def skaiciuoti(saldytuvas):
     saldytuvo_svoris = 0
     for svoris in saldytuvas:
         saldytuvo_svoris += saldytuvas[svoris]
     return saldytuvo_svoris
-
+# 7 recepto patikrinimas
 def ar_iseina(saldytuvas, receptas):
     iseina = []
     for produktas, kiekis in receptas.items():
@@ -116,13 +118,8 @@ while True:
     elif pasirinkimas == "4":
         perziureti(saldytuvas)
     elif pasirinkimas == "5":
-        
-        # Pruduktu paeska
         produktas = input("Koki produkta ieskote? ")
-        if produktas in saldytuvas:
-            print(f"{produktas} - yra {saldytuvas[produktas]} šaldytuve.")
-        else:
-            print(f"{produktas} - nėra šaldytuve.")
+        ieskoti_produkta(produktas, saldytuvas)
     elif pasirinkimas == "6":
         print(f'Bendras produktu svoris: {skaiciuoti(saldytuvas)} kg.')
     elif pasirinkimas == "7":
