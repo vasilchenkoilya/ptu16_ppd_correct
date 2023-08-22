@@ -56,8 +56,11 @@ def perziureti():
     pass
 
 # 5 - ieškoti produktų - Arnoldas
-def ieskoti():
-    pass
+def ieskoti_produkta(produktas, saldytuvas):
+    if produktas in saldytuvas:
+        return f"{produktas} - yra {saldytuvas[produktas]} šaldytuve."
+    else:
+        return f"{produktas} - nėra šaldytuve."
 
 # 0 - išėjimas - Ilya
 # UPDATE INFo 
