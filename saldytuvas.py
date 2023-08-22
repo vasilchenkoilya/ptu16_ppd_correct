@@ -20,8 +20,8 @@ meniu = """
 
 # 1 - pridėti naują produktą - Ilya
 def prideti(saldytuvas):
-    name = input('Iveskite produkto pavadinima')
-    kiekis = float(input('Iveskite kieki'))
+    name = input('Įveskite produkto pavadinimą: ')
+    kiekis = float(input('Įveskite kiekį: '))
     saldytuvas[name] = kiekis
     return saldytuvas
 
@@ -52,7 +52,15 @@ def istraukti():
     pass
 
 # 4 - peržiūrėti produktus - Einaras
-def perziureti():
+def perziureti(saldytuvas):
+    produktas = input("Įveskite produkto pavadinimą, kurį norite ištraukti: ")
+    if produktas in saldytuvas:
+        kiekis = float(input(f"Įveskite kiekį, kurį norite ištraukti (turimas kiekis: {saldytuvas[produktas]}): "))
+        if kiekis <= saldytuvas[produktas]:
+            saldytuvas[produktas] -= kiekis
+            print(f"{produktas} ištraukta {kiekis} vnt. Dabartinis kiekis: {saldytuvas[produktas]}")
+            if saldytuvas[produktas] == 0:
+                del saldytuvas[produktas]
     pass
 
 # 5 - ieškoti produktų - Arnoldas
@@ -137,4 +145,4 @@ while True:
         for recepto_dalis in receptas_list:
             key, value = recepto_dalis.split(': ')
             receptas[key] = float(value)
-        ar_iseina(saldytuvas,receptas)
+        ar_iseina(saldytuvas, receptas)
