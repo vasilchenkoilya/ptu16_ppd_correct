@@ -22,8 +22,26 @@ def prideti(saldytuvas):
     saldytuvas[name] = kiekis
     pass
 # 2 - papildyti produkto kiekį - Igoris
-def papildyti():
-    pass
+def papildyti(saldytuvas):
+    indeksas = 0
+    produktai_saldytuve = list(saldytuvas.keys())
+
+    # Lentele kas yra saldytuve
+    print("Saldytuve yra tokie produktai: ", "\n")
+    print(f"{'Nr.':3s} | {'Maisto produktas':15s} | {'Produkto kiekis':10s}", end="\n")
+    for produktas in saldytuvas:
+        print(f"{indeksas+1:>3d} | {produktas:<16s} | {saldytuvas[produktas]}")
+        indeksas += 1
+
+    # Vartotojo ivestis
+    pasirinktas_indeksas = int(input("Parasykite norimo produkto numeri: ")) -1
+    prideti = int(input("Parasykite kiek norite prideti produkto: "))
+
+    # Maisto papildymas
+    pasirinktas_produktas = produktai_saldytuve[pasirinktas_indeksas]
+    saldytuvas[pasirinktas_produktas] += prideti
+    
+    return saldytuvas
 # 3 - ištraukti produktą nurodant kiekį -Eimantas
 def istraukti():
     pass
@@ -50,23 +68,7 @@ while True:
         kiekis = input('Iveskite kieki: ')
         saldytuvas[produktas] = kiekis
     elif pasirinkimas == "2":
-        indeksas = 0
-        produktai_saldytuve = list(saldytuvas.keys())
-
-        # Lentele kas yra saldytuve
-        print("Saldytuve yra tokie produktai: ", "\n")
-        print(f"{'Nr.':3s} | {'Maisto produktas':15s} | {'Produkto kiekis':10s}", end="\n")
-        for produktas in saldytuvas:
-            print(f"{indeksas+1:>3d} | {produktas:<16s} | {saldytuvas[produktas]}")
-            indeksas += 1
-
-        # Vartotojo ivestis
-        pasirinktas_indeksas = int(input("Parasykite norimo produkto numeri: ")) -1
-        prideti = int(input("Parasykite kiek norite prideti produkto: "))
-
-        # Maisto papildymas
-        pasirinktas_produktas = produktai_saldytuve[pasirinktas_indeksas]
-        saldytuvas[pasirinktas_produktas] += prideti
+        papildyti(saldytuvas)
     elif pasirinkimas == "3":
         # Ištraukti produktą nurodant kiekį
         produktas = input("Įveskite produkto pavadinimą, kurį norite ištraukti: ")
