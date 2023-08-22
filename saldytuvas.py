@@ -132,7 +132,7 @@ while True:
         else:
             print(f"{produktas} - nėra šaldytuve.")
     elif pasirinkimas == "6":
-        print(f'{skaiciuoti(saldytuvas)} kg.')
+        print(f'Bendras produktu svoris: {skaiciuoti(saldytuvas)} kg.')
     elif pasirinkimas == "7":
         vartotojo_ivedimas = input('Iveskite recepta pagal pavizdi : "produktas: kiekis", ""produktas: kiekis", .... ')
         receptas_list = vartotojo_ivedimas.split(', ')
