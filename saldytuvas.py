@@ -1,18 +1,4 @@
 
-# 1 - pridėti naują produktą - Ilya
-
-# 2 - papildyti produkto kiekį - Igoris
-
-# 3 - ištraukti produktą nurodant kiekį -Eimantas
-
-# 4 - peržiūrėti produktus - Einaras
-
-# 5 - ieškoti produktų - Arnoldas
-
-# 0 - išėjimas - Ilya
-# import os
-# #os system isvalo konsole kaip clear komanda kad kiekviena karta tiktais reikalingas tekstas butu
-# os.system("cls")
 saldytuvas = {
     "apelsinai" : 1.5,
     "duona" : 0.8,
@@ -28,6 +14,32 @@ meniu = """
  5 - ieškoti produktų 
  0 - išėjimas
          """
+
+# 1 - pridėti naują produktą - Ilya
+def prideti(saldytuvas):
+    name = input()
+    kiekis = float(input())
+    saldytuvas[name] = kiekis
+    pass
+# 2 - papildyti produkto kiekį - Igoris
+def papildyti():
+    pass
+# 3 - ištraukti produktą nurodant kiekį -Eimantas
+def istraukti():
+    pass
+# 4 - peržiūrėti produktus - Einaras
+def perziureti():
+    pass
+# 5 - ieškoti produktų - Arnoldas
+def ieskoti():
+    pass
+# 0 - išėjimas - Ilya
+# UPDATE INFo :
+def skaiciuoti():
+    pass
+def ar_iseina():
+    pass
+
 while True:
     print(meniu)
     pasirinkimas = input("Pasirinkite veiksma: ")
