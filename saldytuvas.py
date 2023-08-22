@@ -121,9 +121,9 @@ while True:
         pass
     elif pasirinkimas == "7":
         vartotojo_ivedimas = input('Iveskite recepta pagal pavizdi : "produktas: kiekis", ""produktas: kiekis", .... ')
-        receptas = vartotojo_ivedimas.split(', ')
-        receptas_dict = {}
-        for recepto_dalis in receptas:
-            key , value = recepto_dalis.split(': ')
-            receptas_dict[key] = float(value)
-        ar_iseina(saldytuvas,receptas_dict)
+        receptas_list = vartotojo_ivedimas.split(', ')
+        receptas = {}
+        for recepto_dalis in receptas_list:
+            key, value = recepto_dalis.split(': ')
+            receptas[key] = float(value)
+        ar_iseina(saldytuvas,receptas)
