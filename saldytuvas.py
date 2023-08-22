@@ -60,11 +60,11 @@ def istraukti(saldytuvas):
 
 # 4 - peržiūrėti produktus - Einaras
 def perziureti(saldytuvas):
-        print("Saldytuve esantys produktai:")
-        print("{:<15} {:<10}".format("Produktas", "Kiekis"))
-        print("-" * 25)
-        for produktas, kiekis in saldytuvas.items():
-            print("{:<15} {:<10}".format(produktas, kiekis))
+    print("Saldytuve esantys produktai:")
+    print("{:<15} {:<10}".format("Produktas", "Kiekis"))
+    print("-" * 25)
+    for produktas, kiekis in saldytuvas.items():
+        print("{:<15} {:<10}".format(produktas, kiekis))
 
 # 5 - ieškoti produktų - Arnoldas
 def ieskoti():
