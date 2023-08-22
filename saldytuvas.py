@@ -60,7 +60,11 @@ def istraukti(saldytuvas):
 
 # 4 - peržiūrėti produktus - Einaras
 def perziureti(saldytuvas):
-    pass
+    print("Saldytuve esantys produktai:")
+    print("{:<15} {:<10}".format("Produktas", "Kiekis"))
+    print("-" * 25)
+    for produktas, kiekis in saldytuvas.items():
+        print("{:<15} {:<10}".format(produktas, kiekis))
 
 # 5 - ieškoti produktų - Arnoldas
 def ieskoti_produkta(produktas, saldytuvas):
@@ -69,14 +73,13 @@ def ieskoti_produkta(produktas, saldytuvas):
     else:
         print(f"{produktas} - nėra šaldytuve.")
 
-# 0 - išėjimas - Ilya
-# UPDATE INFo 
+# 6 skaiciuoti produktu svori
 def skaiciuoti(saldytuvas):
     saldytuvo_svoris = 0
     for svoris in saldytuvas:
         saldytuvo_svoris += saldytuvas[svoris]
     return saldytuvo_svoris
-
+# 7 recepto patikrinimas
 def ar_iseina(saldytuvas, receptas):
     iseina = []
     for produktas, kiekis in receptas.items():
@@ -113,11 +116,7 @@ while True:
     elif pasirinkimas == "3":
         saldytuvas = istraukti(saldytuvas)
     elif pasirinkimas == "4":
-        print("Saldytuve esantys produktai:")
-        print("{:<15} {:<10}".format("Produktas", "Kiekis"))
-        print("-" * 25)
-        for produktas, kiekis in saldytuvas.items():
-            print("{:<15} {:<10}".format(produktas, kiekis))
+        perziureti(saldytuvas)
     elif pasirinkimas == "5":
         produktas = input("Koki produkta ieskote? ")
         ieskoti_produkta(produktas, saldytuvas)
