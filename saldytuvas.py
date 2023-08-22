@@ -65,9 +65,9 @@ def perziureti(saldytuvas):
 # 5 - ieškoti produktų - Arnoldas
 def ieskoti_produkta(produktas, saldytuvas):
     if produktas in saldytuvas:
-        return f"{produktas} - yra {saldytuvas[produktas]} šaldytuve."
+        print(f"{produktas} - yra {saldytuvas[produktas]} šaldytuve.")
     else:
-        return f"{produktas} - nėra šaldytuve."
+        print(f"{produktas} - nėra šaldytuve.")
 
 # 0 - išėjimas - Ilya
 # UPDATE INFo 
@@ -119,13 +119,8 @@ while True:
         for produktas, kiekis in saldytuvas.items():
             print("{:<15} {:<10}".format(produktas, kiekis))
     elif pasirinkimas == "5":
-        
-        # Pruduktu paeska
         produktas = input("Koki produkta ieskote? ")
-        if produktas in saldytuvas:
-            print(f"{produktas} - yra {saldytuvas[produktas]} šaldytuve.")
-        else:
-            print(f"{produktas} - nėra šaldytuve.")
+        ieskoti_produkta(produktas, saldytuvas)
     elif pasirinkimas == "6":
         print(f'Bendras produktu svoris: {skaiciuoti(saldytuvas)} kg.')
     elif pasirinkimas == "7":
