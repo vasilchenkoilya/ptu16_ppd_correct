@@ -48,19 +48,18 @@ def papildyti(saldytuvas):
     return saldytuvas
 
 # 3 - ištraukti produktą nurodant kiekį -Eimantas
-def istraukti():
-    pass
-
-# 4 - peržiūrėti produktus - Einaras
-def perziureti(saldytuvas):
+def istraukti(saldytuvas):
     produktas = input("Įveskite produkto pavadinimą, kurį norite ištraukti: ")
     if produktas in saldytuvas:
         kiekis = float(input(f"Įveskite kiekį, kurį norite ištraukti (turimas kiekis: {saldytuvas[produktas]}): "))
         if kiekis <= saldytuvas[produktas]:
             saldytuvas[produktas] -= kiekis
-            print(f"{produktas} ištraukta {kiekis} vnt. Dabartinis kiekis: {saldytuvas[produktas]}")
+            print(f"{produktas} ištraukta {kiekis}, Dabartinis kiekis: {saldytuvas[produktas]}")
             if saldytuvas[produktas] == 0:
                 del saldytuvas[produktas]
+
+# 4 - peržiūrėti produktus - Einaras
+def perziureti(saldytuvas):
     pass
 
 # 5 - ieškoti produktų - Arnoldas
@@ -109,19 +108,7 @@ while True:
     elif pasirinkimas == "2":
         saldytuvas = papildyti(saldytuvas)
     elif pasirinkimas == "3":
-        # Ištraukti produktą nurodant kiekį
-        produktas = input("Įveskite produkto pavadinimą, kurį norite ištraukti: ")
-        if produktas in saldytuvas:
-            kiekis = float(input(f"Įveskite kiekį, kurį norite ištraukti (turimas kiekis: {saldytuvas[produktas]}): "))
-            if kiekis <= saldytuvas[produktas]:
-                saldytuvas[produktas] -= kiekis
-                print(f"{produktas} ištraukta {kiekis} vnt. Dabartinis kiekis: {saldytuvas[produktas]}")
-                if saldytuvas[produktas] == 0:
-                    del saldytuvas[produktas]
-            else:
-                print("Nepakankamas kiekis šaldytuve.")
-        else:
-            print(f"{produktas} nėra šaldytuve.")
+        saldytuvas = istraukti(saldytuvas)
     elif pasirinkimas == "4":
         print("Saldytuve esantys produktai:")
         print("{:<15} {:<10}".format("Produktas", "Kiekis"))
