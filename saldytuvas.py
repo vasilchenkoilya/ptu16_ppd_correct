@@ -12,16 +12,17 @@ meniu = """
  2 - papildyti produkto kiekį
  3 - ištraukti produktą nurodant kiekį
  4 - peržiūrėti produktus
- 5 - ieškoti produktų 
+ 5 - ieškoti produktų
+ 6 - Suzinoti saldytuvo svori
+ 7 - Recepto patikrinimas (ar pakanka reikalingu produktu saldytuve) 
  0 - išėjimas
          """
 
 # 1 - pridėti naują produktą - Ilya
 def prideti(saldytuvas):
-    name = input()
-    kiekis = float(input())
+    name = input('Iveskite produkto pavadinima')
+    kiekis = float(input('Iveskite kieki'))
     saldytuvas[name] = kiekis
-    pass
 
 # 2 - papildyti produkto kiekį - Igoris
 def papildyti(saldytuvas):
@@ -58,25 +59,44 @@ def ieskoti():
     pass
 
 # 0 - išėjimas - Ilya
-# UPDATE INFo :
+# UPDATE INFo 
 def skaiciuoti(saldytuvas):
     saldytuvo_svoris = 0
     for svoris in saldytuvas:
         saldytuvo_svoris += saldytuvas[svoris]
     return saldytuvo_svoris
 
-def ar_iseina():
-    pass
-
+def ar_iseina(saldytuvas, receptas):
+    iseina = []
+    for produktas, kiekis in receptas.items():
+        if produktas in saldytuvas and saldytuvas[produktas] > kiekis:
+            iseina.append(True)
+        else:
+            iseina.append(False)
+    if False in iseina:
+        for produktas, kiekis in receptas.items():
+            if produktas in saldytuvas:
+                nepakanka = kiekis - saldytuvas[produktas]
+            else:
+                nepakanka = kiekis
+            print(f'Nepakanka {produktas} ,{nepakanka}')
+    else:
+        print("Pakankamas produktu kiekis sitam receptui saldytuve")
+        kiek_porciju = 0
+        porcijos = []
+        for produktas, kiekis in receptas.items():
+            if produktas in saldytuvas:
+                kiek_porciju = int(saldytuvas[produktas]/kiekis)
+                porcijos.append(kiek_porciju)
+        print(f'Iseis {min(porcijos)} porciju')
+    
 while True:
     print(meniu)
     pasirinkimas = input("Pasirinkite veiksma: ")
     if pasirinkimas == "0":
         break
     elif pasirinkimas == "1":
-        produktas = input('Iveskite produkta: ')
-        kiekis = input('Iveskite kieki: ')
-        saldytuvas[produktas] = kiekis
+        prideti(saldytuvas)
     elif pasirinkimas == "2":
         papildyti(saldytuvas)
     elif pasirinkimas == "3":
@@ -107,3 +127,13 @@ while True:
             print(f"{produktas} - yra {saldytuvas[produktas]} šaldytuve.")
         else:
             print(f"{produktas} - nėra šaldytuve.")
+    elif pasirinkimas == "6":
+        pass
+    elif pasirinkimas == "7":
+        vartotojo_ivedimas = input('Iveskite recepta pagal pavizdi : "produktas: kiekis", ""produktas: kiekis", .... ')
+        receptas_list = vartotojo_ivedimas.split(', ')
+        receptas = {}
+        for recepto_dalis in receptas_list:
+            key, value = recepto_dalis.split(': ')
+            receptas[key] = float(value)
+        ar_iseina(saldytuvas,receptas)
