@@ -6,6 +6,7 @@ saldytuvas = {
     "pienas" : 1,
     "desra" : 0.5
 }
+
 meniu = """
  1 - pridėti naują produktą 
  2 - papildyti produkto kiekį
@@ -21,6 +22,7 @@ def prideti(saldytuvas):
     kiekis = float(input())
     saldytuvas[name] = kiekis
     pass
+
 # 2 - papildyti produkto kiekį - Igoris
 def papildyti(saldytuvas):
     indeksas = 0
@@ -40,21 +42,29 @@ def papildyti(saldytuvas):
     # Maisto papildymas
     pasirinktas_produktas = produktai_saldytuve[pasirinktas_indeksas]
     saldytuvas[pasirinktas_produktas] += prideti
-    
+
     return saldytuvas
+
 # 3 - ištraukti produktą nurodant kiekį -Eimantas
 def istraukti():
     pass
+
 # 4 - peržiūrėti produktus - Einaras
 def perziureti():
     pass
+
 # 5 - ieškoti produktų - Arnoldas
 def ieskoti():
     pass
+
 # 0 - išėjimas - Ilya
 # UPDATE INFo :
-def skaiciuoti():
-    pass
+def skaiciuoti(saldytuvas):
+    saldytuvo_svoris = 0
+    for svoris in saldytuvas:
+        saldytuvo_svoris += saldytuvas[svoris]
+    return saldytuvo_svoris
+
 def ar_iseina():
     pass
 
