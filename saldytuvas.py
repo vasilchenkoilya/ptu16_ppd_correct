@@ -93,7 +93,7 @@ def ar_iseina(saldytuvas, receptas):
                 nepakanka = kiekis - saldytuvas[produktas]
             else:
                 nepakanka = kiekis
-            print(f'Nepakanka {produktas} ,{nepakanka}')
+            print(f'Nepakanka "{produktas}" ,{nepakanka}')
     else:
         print("Pakankamas produktu kiekis sitam receptui saldytuve")
         kiek_porciju = 0
