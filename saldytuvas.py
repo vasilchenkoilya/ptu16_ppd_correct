@@ -123,10 +123,11 @@ while True:
     elif pasirinkimas == "6":
         print(f'Bendras produktu svoris: {skaiciuoti(saldytuvas)} kg.')
     elif pasirinkimas == "7":
-        vartotojo_ivedimas = input('Iveskite recepta pagal pavizdi : "produktas: kiekis", ""produktas: kiekis", .... ')
-        receptas_list = vartotojo_ivedimas.split(', ')
         receptas = {}
-        for recepto_dalis in receptas_list:
-            key, value = recepto_dalis.split(': ')
-            receptas[key] = float(value)
+        while True:
+            produktas = input('Iveskite proukta , arba "0", jeigu norite baigti.')
+            if produktas == '0':
+                break
+            kiekis = input('Iveskite kieki')
+            receptas[produktas] = float(kiekis)
         ar_iseina(saldytuvas, receptas)
