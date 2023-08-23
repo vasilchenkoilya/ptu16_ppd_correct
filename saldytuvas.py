@@ -81,8 +81,8 @@ def skaiciuoti(saldytuvas):
         saldytuvo_svoris += saldytuvas[svoris]
     return saldytuvo_svoris
 
-# 7 recepto patikrinimas
-def ar_iseina(saldytuvas, receptas):
+# 7.1 surenkame produktus, kuriu receptui iseina i viena sarasa, kitus i kita
+def recepto_ingredientu_tikrinimas(saldytuvas, receptas):
     iseina = []
     neiseina = {}
     for produktas, kiekis in receptas.items():
@@ -91,20 +91,28 @@ def ar_iseina(saldytuvas, receptas):
         else:
             iseina.append(False)
             neiseina[produktas] = kiekis - saldytuvas[produktas]
-        
+    return iseina, neiseina
+
+# 7.2 Isspaudinam kiek iseina porciju pagal recepta
+def spausdinti_kiek_iseina(saldytuvas, receptas):
+    print("Pakankamas produktu kiekis sitam receptui saldytuve")
+    kiek_porciju = 0
+    porcijos = []
+    for produktas, kiekis in receptas.items():
+        if produktas in saldytuvas:
+            kiek_porciju = int(saldytuvas[produktas] / kiekis)
+            porcijos.append(kiek_porciju)
+    print(f'Iseis {min(porcijos)} porciju')
+
+# 7 recepto patikrinimas
+def ar_iseina(saldytuvas, receptas):
+    iseina, neiseina = recepto_ingredientu_tikrinimas(saldytuvas, receptas)
     if False in iseina:
         for nepakankamas_produktas, nepakankamas_kiekis in neiseina.items():
             print(f'Nepakanka "{nepakankamas_produktas}" : {nepakankamas_kiekis}')
     else:
-        print("Pakankamas produktu kiekis sitam receptui saldytuve")
-        kiek_porciju = 0
-        porcijos = []
-        for produktas, kiekis in receptas.items():
-            if produktas in saldytuvas:
-                kiek_porciju = int(saldytuvas[produktas]/kiekis)
-                porcijos.append(kiek_porciju)
-        print(f'Iseis {min(porcijos)} porciju')
-    
+        spausdinti_kiek_iseina(saldytuvas, receptas)
+
 while True:
     print(meniu)
     pasirinkimas = input("Pasirinkite veiksma: ")
