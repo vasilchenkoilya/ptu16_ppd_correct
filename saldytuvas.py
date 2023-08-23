@@ -126,7 +126,7 @@ while True:
     elif pasirinkimas == "7":
         receptas = {}
         while True:
-            produktas = input('Iveskite proukta , arba "0", jeigu norite baigti.')
+            produktas = input('Iveskite produkta , arba "0", jeigu norite baigti.')
             if produktas == '0':
                 break
             kiekis = input('Iveskite kieki')
