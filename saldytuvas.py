@@ -57,6 +57,7 @@ def istraukti(saldytuvas):
             print(f"{produktas} ištraukta {kiekis}, Dabartinis kiekis: {saldytuvas[produktas]}")
             if saldytuvas[produktas] == 0:
                 del saldytuvas[produktas]
+    return saldytuvas
 
 # 4 - peržiūrėti produktus - Einaras
 def perziureti(saldytuvas):
@@ -79,21 +80,21 @@ def skaiciuoti(saldytuvas):
     for svoris in saldytuvas:
         saldytuvo_svoris += saldytuvas[svoris]
     return saldytuvo_svoris
+
 # 7 recepto patikrinimas
 def ar_iseina(saldytuvas, receptas):
     iseina = []
+    neiseina = {}
     for produktas, kiekis in receptas.items():
         if produktas in saldytuvas and saldytuvas[produktas] > kiekis:
             iseina.append(True)
         else:
             iseina.append(False)
+            neiseina[produktas] = kiekis - saldytuvas[produktas]
+        
     if False in iseina:
-        for produktas, kiekis in receptas.items():
-            if produktas in saldytuvas:
-                nepakanka = kiekis - saldytuvas[produktas]
-            else:
-                nepakanka = kiekis
-            print(f'Nepakanka "{produktas}" ,{nepakanka}')
+        for nepakankamas_produktas, nepakankamas_kiekis in neiseina.items():
+            print(f'Nepakanka "{nepakankamas_produktas}" : {nepakankamas_kiekis}')
     else:
         print("Pakankamas produktu kiekis sitam receptui saldytuve")
         kiek_porciju = 0
