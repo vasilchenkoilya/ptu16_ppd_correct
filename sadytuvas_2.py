@@ -20,7 +20,7 @@ class Saldytuvas:
  7 - Recepto patikrinimas (ar pakanka reikalingu produktu saldytuve) 
  0 - išėjimas
          """
-    
+
     def meniu_pasirinkimas():
         print(Saldytuvas.meniu)
 
@@ -55,7 +55,7 @@ class Saldytuvas:
                     saldytuvas_json = json.dump(Saldytuvas.turinys, saldytuvas_json, indent=2)
                 break
             elif pasirinkimas == "1":
-                Saldytuvas.prideti(
+                Saldytuvas.prideti(self=Saldytuvas,
                     produktas=input('Iveskite produkto pavadinima'), kiekis=float(input('Iveskite kieki'))
                     )
 #             elif pasirinkimas == "2":
