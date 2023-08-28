@@ -1,11 +1,17 @@
-
-saldytuvas = {
-    "apelsinai" : 1.5,
-    "duona" : 0.8,
-    "mesa" : 2,
-    "pienas" : 1,
-    "desra" : 0.5
-}
+import json
+try:
+    with open("saldytuvas.json", "r") as saldytuvas_dict:
+        saldytuvas = json.load(saldytuvas_dict)
+except:
+    with open("saldytuvas.json", "w") as saldytuvas_dict:
+        saldytuvas = json.load(saldytuvas_dict)
+# saldytuvas = {
+#     "apelsinai" : 1.5,
+#     "duona" : 0.8,
+#     "mesa" : 2,
+#     "pienas" : 1,
+#     "desra" : 0.5
+# }
 
 meniu = """
  1 - pridėti naują produktą 
@@ -66,6 +72,7 @@ def perziureti(saldytuvas):
     print("-" * 25)
     for produktas, kiekis in saldytuvas.items():
         print("{:<15} {:<10}".format(produktas, kiekis))
+    
 
 # 5 - ieškoti produktų - Arnoldas
 def ieskoti_produkta(produktas, saldytuvas):
@@ -82,8 +89,8 @@ def skaiciuoti(saldytuvas):
     print(f"Saldytuvo svoris yra: {saldytuvo_svoris}")
     return saldytuvo_svoris
 
-# 7 recepto patikrinimas
-def ar_iseina(saldytuvas, receptas):
+# 7.1 surenkame produktus, kuriu receptui iseina i viena sarasa, kitus i kita
+def recepto_ingredientu_tikrinimas(saldytuvas, receptas):
     iseina = []
     neiseina = {}
     for produktas, kiekis in receptas.items():
@@ -92,20 +99,28 @@ def ar_iseina(saldytuvas, receptas):
         else:
             iseina.append(False)
             neiseina[produktas] = kiekis - saldytuvas[produktas]
-        
+    return iseina, neiseina
+
+# 7.2 Isspaudinam kiek iseina porciju pagal recepta
+def spausdinti_kiek_iseina(saldytuvas, receptas):
+    print("Pakankamas produktu kiekis sitam receptui saldytuve")
+    kiek_porciju = 0
+    porcijos = []
+    for produktas, kiekis in receptas.items():
+        if produktas in saldytuvas:
+            kiek_porciju = int(saldytuvas[produktas] / kiekis)
+            porcijos.append(kiek_porciju)
+    print(f'Iseis {min(porcijos)} porciju')
+
+# 7 recepto patikrinimas
+def ar_iseina(saldytuvas, receptas):
+    iseina, neiseina = recepto_ingredientu_tikrinimas(saldytuvas, receptas)
     if False in iseina:
         for nepakankamas_produktas, nepakankamas_kiekis in neiseina.items():
             print(f'Nepakanka "{nepakankamas_produktas}" : {nepakankamas_kiekis}')
     else:
-        print("Pakankamas produktu kiekis sitam receptui saldytuve")
-        kiek_porciju = 0
-        porcijos = []
-        for produktas, kiekis in receptas.items():
-            if produktas in saldytuvas:
-                kiek_porciju = int(saldytuvas[produktas]/kiekis)
-                porcijos.append(kiek_porciju)
-        print(f'Iseis {min(porcijos)} porciju')
-    
+        spausdinti_kiek_iseina(saldytuvas, receptas)
+
 while True:
     print(meniu)
     pasirinkimas = input("Pasirinkite veiksma: ")
@@ -127,8 +142,10 @@ while True:
     elif pasirinkimas == "7":
         receptas = {}
         while True:
-            produktas = input('Iveskite proukta , arba "0", jeigu norite baigti.')
+            produktas = input('Iveskite produkta , arba "0", jeigu norite baigti.')
             if produktas == '0':
+                with open("saldytuvas.json", "w") as saldytuvas_json:
+                    saldytuvas_json = json.dump(saldytuvas, saldytuvas_json, indent=2)
                 break
             kiekis = input('Iveskite kieki')
             receptas[produktas] = float(kiekis)
