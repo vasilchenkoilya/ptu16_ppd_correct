@@ -45,7 +45,7 @@ class Saldytuvas:
     def receptas(self, product:str, quantity:float):
         pass
 
-    def ijungti():
+    def ijungti(self):
         
         Saldytuvas.meniu_pasirinkimas()
         while True:  
@@ -55,7 +55,7 @@ class Saldytuvas:
                     saldytuvas_json = json.dump(Saldytuvas.turinys, saldytuvas_json, indent=2)
                 break
             elif pasirinkimas == "1":
-                Saldytuvas.prideti(self=Saldytuvas,
+                Saldytuvas.prideti(
                     produktas=input('Iveskite produkto pavadinima'), kiekis=float(input('Iveskite kieki'))
                     )
 #             elif pasirinkimas == "2":
@@ -69,16 +69,16 @@ class Saldytuvas:
 #                 ieskoti_produkta(produktas, saldytuvas)
 #             elif pasirinkimas == "6":
 #                 print(f'Bendras produktu svoris: {skaiciuoti(saldytuvas)} kg.')
-#             elif pasirinkimas == "7":
-#                 receptas = {}
-#                 while True:
-#                     produktas = input('Iveskite produkta , arba "0", jeigu norite baigti.')
-#                     if produktas == '0':
-#                         with open("saldytuvas.json", "w") as saldytuvas_json:
-#                             saldytuvas_json = json.dump(Saldytuvas.turinys, saldytuvas_json, indent=2)
-#                         break
-#                     kiekis = input('Iveskite kieki')
-#                     receptas[produktas] = float(kiekis)
-#                 ar_iseina(saldytuvas, receptas)
+            elif pasirinkimas == "7":
+                receptas = {}
+                while True:
+                    produktas = input('Iveskite produkta , arba "0", jeigu norite baigti.')
+                    if produktas == '0':
+                        with open("saldytuvas.json", "w") as saldytuvas_json:
+                            saldytuvas_json = json.dump(Saldytuvas.turinys, saldytuvas_json, indent=2)
+                        break
+                    kiekis = input('Iveskite kieki')
+                    receptas[produktas] = float(kiekis)
+                ar_iseina(saldytuvas, receptas)
 
 Saldytuvas.ijungti()    
