@@ -1,11 +1,17 @@
-
-saldytuvas = {
-    "apelsinai" : 1.5,
-    "duona" : 0.8,
-    "mesa" : 2,
-    "pienas" : 1,
-    "desra" : 0.5
-}
+import json
+try:
+    with open("saldytuvas.json", "r") as saldytuvas_dict:
+        saldytuvas = json.load(saldytuvas_dict)
+except:
+    with open("saldytuvas.json", "w") as saldytuvas_dict:
+        saldytuvas = json.load(saldytuvas_dict)
+# saldytuvas = {
+#     "apelsinai" : 1.5,
+#     "duona" : 0.8,
+#     "mesa" : 2,
+#     "pienas" : 1,
+#     "desra" : 0.5
+# }
 
 meniu = """
  1 - pridėti naują produktą 
@@ -66,6 +72,7 @@ def perziureti(saldytuvas):
     print("-" * 25)
     for produktas, kiekis in saldytuvas.items():
         print("{:<15} {:<10}".format(produktas, kiekis))
+    
 
 # 5 - ieškoti produktų - Arnoldas
 def ieskoti_produkta(produktas, saldytuvas):
@@ -136,6 +143,8 @@ while True:
         while True:
             produktas = input('Iveskite produkta , arba "0", jeigu norite baigti.')
             if produktas == '0':
+                with open("saldytuvas.json", "w")as saldytuvas_json:
+                    saldytuvas_json = json.dump(saldytuvas, saldytuvas_json, indent=2)
                 break
             kiekis = input('Iveskite kieki')
             receptas[produktas] = float(kiekis)
