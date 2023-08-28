@@ -20,6 +20,7 @@ except:
         json.dump(saldytuvas, saldytuvas_dict)
 
 class Saldytuvas:
+    
     turinys = saldytuvas
 
     def prideti(self, produktas, kiekis):
@@ -58,49 +59,48 @@ class Saldytuvas:
     def svoris(self):
         pass
 
-    def receptas(self):
-        
-        def recepto_ingredientu_tikrinimas(saldytuvas, receptas):
-            iseina = []
-            neiseina = {}
-            for produktas, kiekis in receptas.items():
-                if produktas in saldytuvas and saldytuvas[produktas] > kiekis:
-                    iseina.append(True)
-                else:
-                    iseina.append(False)
-                    neiseina[produktas] = kiekis - saldytuvas[produktas]
-            return iseina, neiseina
+    def recepto_ingredientu_tikrinimas(self, receptas):
+        iseina = []
+        neiseina = {}
+        for produktas, kiekis in receptas.items():
+            if produktas in self.turinys and self.turinys[produktas] > kiekis:
+                iseina.append(True)
+            else:
+                iseina.append(False)
+                neiseina[produktas] = kiekis - self.turinys[produktas]
+        return iseina, neiseina
 
         # 7 Isspaudinam kiek iseina porciju pagal recepta
-        def spausdinti_kiek_iseina(saldytuvas, receptas):
-            print("Pakankamas produktu kiekis sitam receptui saldytuve")
-            kiek_porciju = 0
-            porcijos = []
-            for produktas, kiekis in receptas.items():
-                if produktas in saldytuvas:
-                    kiek_porciju = int(saldytuvas[produktas] / kiekis)
-                    porcijos.append(kiek_porciju)
-            print(f'Iseis {min(porcijos)} porciju')
+    def spausdinti_kiek_iseina(self, receptas):
+        print("Pakankamas produktu kiekis sitam receptui saldytuve")
+        kiek_porciju = 0
+        porcijos = []
+        for produktas, kiekis in receptas.items():
+            if produktas in self.turinys:
+                kiek_porciju = int(self.turinys[produktas] / kiekis)
+                porcijos.append(kiek_porciju)
+        print(f'Iseis {min(porcijos)} porciju')
 
         # 7 recepto patikrinimas
-        def ar_iseina(saldytuvas, receptas):
-            iseina, neiseina = recepto_ingredientu_tikrinimas(saldytuvas, receptas)
-            if False in iseina:
-                for nepakankamas_produktas, nepakankamas_kiekis in neiseina.items():
-                    print(f'Nepakanka "{nepakankamas_produktas}" : {nepakankamas_kiekis}')
-            else:
-                spausdinti_kiek_iseina(saldytuvas, receptas)
+    def ar_iseina(self, receptas):
+        iseina, neiseina = self.recepto_ingredientu_tikrinimas(receptas)
+        if False in iseina:
+            for nepakankamas_produktas, nepakankamas_kiekis in neiseina.items():
+                print(f'Nepakanka "{nepakankamas_produktas}" : {nepakankamas_kiekis}')
+        else:
+            self.spausdinti_kiek_iseina(receptas)
         
-        receptas = {}
+    def receptas(self):
+        receptas = {}        
         while True:
             produktas = input('Iveskite produkta , arba "0", jeigu norite baigti.')
             if produktas == '0':
                 break
             kiekis = input('Iveskite kieki')
             receptas[produktas] = float(kiekis)
-        ar_iseina(saldytuvas, receptas)
+        self.ar_iseina(receptas)
       
-whirpool = Saldytuvas
+whirpool = Saldytuvas()
 
 while True:
     print(meniu)
@@ -110,7 +110,9 @@ while True:
             saldytuvas_json = json.dump(Saldytuvas.turinys, saldytuvas_json, indent=2)
         break
     elif pasirinkimas == "1":
-        whirpool.prideti(produktas=input("Iveskite produkto pavadinima"), kiekis=float(input("Iveskite kieki")))
+        whirpool.prideti(
+            produktas=input("Iveskite produkto pavadinima"), kiekis=float(input("Iveskite kieki"))
+            )
     elif pasirinkimas == "2":
         whirpool.papildyti()
     elif pasirinkimas == "3":
