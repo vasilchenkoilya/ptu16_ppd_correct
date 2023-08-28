@@ -143,7 +143,7 @@ while True:
         while True:
             produktas = input('Iveskite produkta , arba "0", jeigu norite baigti.')
             if produktas == '0':
-                with open("saldytuvas.json", "w")as saldytuvas_json:
+                with open("saldytuvas.json", "w") as saldytuvas_json:
                     saldytuvas_json = json.dump(saldytuvas, saldytuvas_json, indent=2)
                 break
             kiekis = input('Iveskite kieki')
