@@ -86,7 +86,6 @@ def skaiciuoti(saldytuvas):
     saldytuvo_svoris = 0
     for svoris in saldytuvas:
         saldytuvo_svoris += saldytuvas[svoris]
-    print(f"Saldytuvo svoris yra: {saldytuvo_svoris}")
     return saldytuvo_svoris
 
 # 7.1 surenkame produktus, kuriu receptui iseina i viena sarasa, kitus i kita

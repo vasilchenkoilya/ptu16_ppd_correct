@@ -11,18 +11,17 @@ meniu = """
  0 - išėjimas
          """
 
-try:
-    with open("fridge.json", "r+") as saldytuvas_dict:
-        saldytuvas = json.load(saldytuvas_dict)
-except:
-    saldytuvas = {}
-    with open("fridge.json", "w") as saldytuvas_dict:
-        json.dump(saldytuvas, saldytuvas_dict)
+def meniu_pasirinkimas():
+    print(Saldytuvas.meniu)
 
 class Saldytuvas:
-    
-    turinys = saldytuvas
-
+    def __init__(self) -> None:
+        try:
+            with open("fridge.json", "r+") as saldytuvo_failas:
+                self.turinys = json.load(saldytuvo_failas)
+        except:
+            self.turinys = {}
+        pass
     def prideti(self, produktas, kiekis):
         self.turinys[produktas] = kiekis
 
@@ -35,30 +34,42 @@ class Saldytuvas:
 
         print("Saldytuve yra tokie produktai: ", "\n")
         print(f"{'Nr.':3s} | {'Maisto produktas':15s} | {'Produkto kiekis':10s}", end="\n")
-        for produktas in self:
-            print(f"{indeksas+1:>3d} | {produktas:<16s} | {self[produktas]}")
+        for produktas in self.turinys:
+            print(f"{indeksas+1:>3d} | {produktas:<16s} | {self.turinys[produktas]}")
             indeksas += 1
 
         pasirinktas_indeksas = int(input("Parasykite norimo produkto numeri: ")) -1
         prideti = int(input("Parasykite kiek norite prideti produkto: "))
 
-        pasirinktas_produktas = self[pasirinktas_indeksas]
-        self[pasirinktas_produktas] += prideti
-
-        return self
+        pasirinktas_produktas = self.turinys[pasirinktas_indeksas]
+        self.turinys[pasirinktas_produktas] += prideti
     
-    def istraukti(self, product:str, quantity:float):
-        pass
+    def istraukti(self, produktas):
+        if produktas in self.turinys:
+            kiekis = float(input(f"Įveskite kiekį, kurį norite ištraukti (turimas kiekis: {self.turinys[produktas]}): "))
+            if kiekis <= self.turinys[produktas]:
+                self.turinys[produktas] -= kiekis
+                print(f"{produktas} ištraukta {kiekis}, Dabartinis kiekis: {self.turinys[produktas]}")
+                if self.turinys[produktas] == 0:
+                    del self.turinys[produktas]
+            else:
+                print('Nepakankamas kiekis šaldytuve.')
+        else:
+            print(f"Produktas {produktas} nerastas šaldytuve.")
 
-    def perziureti(self):
-        pass
+    pass
 
-    def ieskoti_produkta(self, product:str):
-        pass
+def perziureti(self):
+    pass
 
-    def svoris(self):
-        pass
+def ieskoti_produkta(self, product:str):
+    pass
 
+def svoris(self):
+    pass
+
+    def receptas(self, product:str, quantity:float):
+        pass
     def recepto_ingredientu_tikrinimas(self, receptas):
         iseina = []
         neiseina = {}
@@ -116,7 +127,8 @@ while True:
     elif pasirinkimas == "2":
         whirpool.papildyti()
     elif pasirinkimas == "3":
-        whirpool.istraukti()
+        produktas = input("Iveskite produkto pavadinima: ")
+        whirpool.istraukti(produktas)
     elif pasirinkimas == "4":
         whirpool.perziureti()
     elif pasirinkimas == "5":
