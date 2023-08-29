@@ -59,17 +59,16 @@ class Saldytuvas:
 
     pass
 
-def perziureti(self):
-    pass
-
-def ieskoti_produkta(self, product:str):
-    pass
-
-def svoris(self):
-    pass
-
-    def receptas(self, product:str, quantity:float):
+    def perziureti(self):
         pass
+
+    def ieskoti_produkta(self, product:str):
+        pass
+
+    def svoris(self):
+        pass
+
+
     def recepto_ingredientu_tikrinimas(self, receptas):
         iseina = []
         neiseina = {}
@@ -78,7 +77,10 @@ def svoris(self):
                 iseina.append(True)
             else:
                 iseina.append(False)
-                neiseina[produktas] = kiekis - self.turinys[produktas]
+                if produktas in self.turinys:
+                    neiseina[produktas] = kiekis - self.turinys[produktas]
+                else:
+                    neiseina[produktas] = kiekis
         return iseina, neiseina
 
         # 7 Isspaudinam kiek iseina porciju pagal recepta
