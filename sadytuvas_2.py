@@ -11,35 +11,20 @@ meniu = """
  0 - išėjimas
          """
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-def prideti(self, product:str, quantity:float):
-    self.turinys[product] = quantity
-=======
-    def meniu_pasirinkimas():
-        print(Saldytuvas.meniu)
-=======
-try:
-    with open("fridge.json", "r+") as saldytuvas_dict:
-        saldytuvas = json.load(saldytuvas_dict)
-except:
-    saldytuvas = {}
-    with open("fridge.json", "w") as saldytuvas_dict:
-        json.dump(saldytuvas, saldytuvas_dict)
+def meniu_pasirinkimas():
+    print(Saldytuvas.meniu)
 
 class Saldytuvas:
-    
-    turinys = saldytuvas
->>>>>>> cc5cb9438f17c48a4b03580f53ba004a9ef7d192
-
+    def __init__(self) -> None:
+        try:
+            with open("fridge.json", "r+") as saldytuvo_failas:
+                self.turinys = json.load(saldytuvo_failas)
+        except:
+            self.turinys = {}
+        pass
     def prideti(self, produktas, kiekis):
         self.turinys[produktas] = kiekis
->>>>>>> e11167f0a919826cfb39f931f4668a2c9551fbb4
 
-<<<<<<< HEAD
-def papildyti(self, product:str, quantity:float):
-    pass
-=======
     def papildyti(self) -> str | float :
         """Funkcija isves menu, kur bus parodyta lentele 
         su visais maisto produktais ir jiems priskirti 
@@ -49,31 +34,29 @@ def papildyti(self, product:str, quantity:float):
 
         print("Saldytuve yra tokie produktai: ", "\n")
         print(f"{'Nr.':3s} | {'Maisto produktas':15s} | {'Produkto kiekis':10s}", end="\n")
-        for produktas in self:
-            print(f"{indeksas+1:>3d} | {produktas:<16s} | {self[produktas]}")
+        for produktas in self.turinys:
+            print(f"{indeksas+1:>3d} | {produktas:<16s} | {self.turinys[produktas]}")
             indeksas += 1
 
         pasirinktas_indeksas = int(input("Parasykite norimo produkto numeri: ")) -1
         prideti = int(input("Parasykite kiek norite prideti produkto: "))
 
-        pasirinktas_produktas = self[pasirinktas_indeksas]
-        self[pasirinktas_produktas] += prideti
-
-        return self
->>>>>>> cc5cb9438f17c48a4b03580f53ba004a9ef7d192
+        pasirinktas_produktas = self.turinys[pasirinktas_indeksas]
+        self.turinys[pasirinktas_produktas] += prideti
     
-def istraukti(self, product:str):
-    if product in self.turinys:
-        kiekis = float(input(f"Įveskite kiekį, kurį norite ištraukti (turimas kiekis: {self.turinys[product]}): "))
-        if kiekis <= self.turinys[product]:
-            self.turinys[product] -= kiekis
-            print(f"{product} ištraukta {kiekis}, Dabartinis kiekis: {self.turinys[product]}")
-            if self.turinys[product] == 0:
-                del self.turinys[product]
+    def istraukti(self, produktas):
+        if produktas in self.turinys:
+            kiekis = float(input(f"Įveskite kiekį, kurį norite ištraukti (turimas kiekis: {self.turinys[produktas]}): "))
+            if kiekis <= self.turinys[produktas]:
+                self.turinys[produktas] -= kiekis
+                print(f"{produktas} ištraukta {kiekis}, Dabartinis kiekis: {self.turinys[produktas]}")
+                if self.turinys[produktas] == 0:
+                    del self.turinys[produktas]
+            else:
+                print('Nepakankamas kiekis šaldytuve.')
         else:
-            print('Nepakankamas kiekis šaldytuve.')
-    else:
-        print(f"Produktas {product} nerastas šaldytuve.")
+            print(f"Produktas {produktas} nerastas šaldytuve.")
+
     pass
 
 def perziureti(self):
@@ -85,15 +68,8 @@ def ieskoti_produkta(self, product:str):
 def svoris(self):
     pass
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-def receptas(self, product:str, quantity:float):
-    pass
-    
-=======
     def receptas(self, product:str, quantity:float):
         pass
-=======
     def recepto_ingredientu_tikrinimas(self, receptas):
         iseina = []
         neiseina = {}
@@ -104,7 +80,6 @@ def receptas(self, product:str, quantity:float):
                 iseina.append(False)
                 neiseina[produktas] = kiekis - self.turinys[produktas]
         return iseina, neiseina
->>>>>>> cc5cb9438f17c48a4b03580f53ba004a9ef7d192
 
         # 7 Isspaudinam kiek iseina porciju pagal recepta
     def spausdinti_kiek_iseina(self, receptas):
@@ -138,10 +113,6 @@ def receptas(self, product:str, quantity:float):
       
 whirpool = Saldytuvas()
 
-<<<<<<< HEAD
-Saldytuvas.ijungti()    
->>>>>>> e11167f0a919826cfb39f931f4668a2c9551fbb4
-=======
 while True:
     print(meniu)
     pasirinkimas = input("Pasirinkite veiksma: ")
@@ -156,7 +127,8 @@ while True:
     elif pasirinkimas == "2":
         whirpool.papildyti()
     elif pasirinkimas == "3":
-        whirpool.istraukti()
+        produktas = input("Iveskite produkto pavadinima: ")
+        whirpool.istraukti(produktas)
     elif pasirinkimas == "4":
         whirpool.perziureti()
     elif pasirinkimas == "5":
@@ -165,4 +137,3 @@ while True:
         whirpool.svoris()
     elif pasirinkimas == "7":
         whirpool.receptas()
->>>>>>> cc5cb9438f17c48a4b03580f53ba004a9ef7d192
