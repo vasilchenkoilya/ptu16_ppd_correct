@@ -1,6 +1,8 @@
 import json
+import os
 
 meniu = """
+ A - Atidariti saldytuva
  1 - pridėti naują produktą 
  2 - papildyti produkto kiekį
  3 - ištraukti produktą nurodant kiekį
@@ -31,6 +33,7 @@ class Saldytuvas:
         eiles numeriai
         """
         indeksas = 0
+        produktai_saldytuve = list(self.turinys.keys())
 
         print("Saldytuve yra tokie produktai: ", "\n")
         print(f"{'Nr.':3s} | {'Maisto produktas':15s} | {'Produkto kiekis':10s}", end="\n")
@@ -39,9 +42,9 @@ class Saldytuvas:
             indeksas += 1
 
         pasirinktas_indeksas = int(input("Parasykite norimo produkto numeri: ")) -1
-        prideti = int(input("Parasykite kiek norite prideti produkto: "))
+        prideti = float(input("Parasykite kiek norite prideti produkto: "))
 
-        pasirinktas_produktas = self.turinys[pasirinktas_indeksas]
+        pasirinktas_produktas = produktai_saldytuve[pasirinktas_indeksas]
         self.turinys[pasirinktas_produktas] += prideti
     
     def istraukti(self, produktas):
@@ -49,7 +52,7 @@ class Saldytuvas:
             kiekis = float(input(f"Įveskite kiekį, kurį norite ištraukti (turimas kiekis: {self.turinys[produktas]}): "))
             if kiekis <= self.turinys[produktas]:
                 self.turinys[produktas] -= kiekis
-                print(f"{produktas} ištraukta {kiekis}, Dabartinis kiekis: {self.turinys[produktas]}")
+                print(f"{produktas} ištraukta {kiekis:.2f}, Dabartinis kiekis: {self.turinys[produktas]:.2f}")
                 if self.turinys[produktas] == 0:
                     del self.turinys[produktas]
             else:
@@ -57,16 +60,24 @@ class Saldytuvas:
         else:
             print(f"Produktas {produktas} nerastas šaldytuve.")
 
-    pass
-
     def perziureti(self):
-        pass
+        print("Saldytuve esantys produktai:")
+        print("{:<15} {:<10}".format("Produktas", "Kiekis"))
+        print("-" * 25)
+        for produktas, kiekis in self.turinys.items():
+            print("{:<15} {:<10}".format(produktas, kiekis))
 
-    def ieskoti_produkta(self, product:str):
-        pass
+    def ieskoti_produkta(self, produktas):
+        if produktas in self.turinys:
+            print(f"{produktas} - yra {self.turinys[produktas]} šaldytuve.")
+        else:
+            print(f"{produktas} - nėra šaldytuve.")
 
     def svoris(self):
-        pass
+        saldytuvo_svoris = 0
+        for svoris in self.turinys:
+            saldytuvo_svoris += self.turinys[svoris]
+        print(f'Bendras produktu svoris - {saldytuvo_svoris} kg.')
 
 
     def recepto_ingredientu_tikrinimas(self, receptas):
@@ -112,6 +123,18 @@ class Saldytuvas:
             kiekis = input('Iveskite kieki')
             receptas[produktas] = float(kiekis)
         self.ar_iseina(receptas)
+    
+    def uzdaryti(self):
+        with open("fridge.json", "w") as json_file:
+            json.dump(self.turinys,json_file, indent=2)
+        
+    def atidaryti(self):
+        if os.path.exists("fridge.json"):
+            with open("fridge.json", "r") as json_file:
+                self.turinys = json.load(json_file)
+        else:
+            print("nerastas .json failas")
+
       
 whirpool = Saldytuvas()
 
@@ -119,9 +142,10 @@ while True:
     print(meniu)
     pasirinkimas = input("Pasirinkite veiksma: ")
     if pasirinkimas == "0":
-        with open("fridge.json", "w") as saldytuvas_json:
-            saldytuvas_json = json.dump(Saldytuvas.turinys, saldytuvas_json, indent=2)
+        whirpool.uzdaryti()
         break
+    elif pasirinkimas == "A":
+        whirpool.atidaryti()
     elif pasirinkimas == "1":
         whirpool.prideti(
             produktas=input("Iveskite produkto pavadinima"), kiekis=float(input("Iveskite kieki"))
@@ -134,7 +158,7 @@ while True:
     elif pasirinkimas == "4":
         whirpool.perziureti()
     elif pasirinkimas == "5":
-        whirpool.ieskoti_produkta()
+        whirpool.ieskoti_produkta(produktas=input("iveskite ieskoma produkta"))
     elif pasirinkimas == "6":
         whirpool.svoris()
     elif pasirinkimas == "7":
